@@ -92,17 +92,17 @@ class Menu(QMainWindow):
 
     def open_easy_o_oh(self):
         # Form changer
-        self.easy_O_OH_form = Menu(self, "")
+        self.easy_O_OH_form = Wait()
         self.easy_O_OH_form.show()
 
     def open_hard_elem(self):
         # Form changer
-        self.hard_Elem_form = Menu(self, "")
+        self.hard_Elem_form = HardElem()
         self.hard_Elem_form.show()
 
     def open_hard_o_oh(self):
         # Form changer
-        self.hard_O_OH_form = Menu(self, "")
+        self.hard_O_OH_form = Wait()
         self.hard_O_OH_form.show()
 
 
@@ -140,7 +140,7 @@ class Handbook(QWidget):
 
     def open_handbook_oh(self):
         # Form changer
-        self.easy_Elem_form = EasyElem()
+        self.easy_Elem_form = HandbookOH()
         self.easy_Elem_form.show()
         self.close()
 
@@ -154,14 +154,14 @@ class HandbookO(QWidget):
         # Window setup
         self.setGeometry(412, 412, 412, 500)
         self.setWindowTitle('Хiмоz@ for punks')
-        self.pixmap = QPixmap('o.jpg')
+        self.pixmap = QPixmap('OH.png')
         self.image = QLabel(self)
         self.image.move(0, 0)
         self.image.resize(412, 412)
         self.image.setPixmap(self.pixmap)
         self.setWindowIcon(QIcon("icon.jpg"))
 
-        self.button_1 = QPushButton('Оксиды', self)
+        self.button_1 = QPushButton('Элементы', self)
         self.button_1.resize(206, 100)
         self.button_1.move(0, 400)
         self.button_1.clicked.connect(self.open_handbook_o)
@@ -175,11 +175,52 @@ class HandbookO(QWidget):
         # Form changer
         self.easy_Handbook_form = Handbook()
         self.easy_Handbook_form.show()
+        self.close()
+
+    def open_handbook_oh(self):
+        # Form changer
+        self.easy_Elem_form = HandbookOH()
+        self.easy_Elem_form.show()
+        self.close()
+
+
+class HandbookOH(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+
+    def initUI(self):
+        # Window setup
+        self.setGeometry(412, 412, 412, 500)
+        self.setWindowTitle('Хiмоz@ for punks')
+        self.pixmap = QPixmap('OH.png')
+        self.image = QLabel(self)
+        self.image.move(0, 0)
+        self.image.resize(412, 412)
+        self.image.setPixmap(self.pixmap)
+        self.setWindowIcon(QIcon("icon.jpg"))
+
+        self.button_1 = QPushButton('Оксиды', self)
+        self.button_1.resize(206, 100)
+        self.button_1.move(0, 400)
+        self.button_1.clicked.connect(self.open_handbook_o)
+
+        self.button_2 = QPushButton('Элементы', self)
+        self.button_2.resize(206, 100)
+        self.button_2.move(206, 400)
+        self.button_2.clicked.connect(self.open_handbook_oh)
+
+    def open_handbook_o(self):
+        # Form changer
+        self.easy_Handbook_form = HandbookO()
+        self.easy_Handbook_form.show()
+        self.close()
 
     def open_handbook_oh(self):
         # Form changer
         self.easy_Elem_form = EasyElem()
         self.easy_Elem_form.show()
+        self.close()
 
 
 class EasyElem(QWidget):
@@ -249,13 +290,118 @@ class EasyElem(QWidget):
         # Form changer
         self.easy_Elem_form = EasyElem()
         self.easy_Elem_form.show()
-        self.score += 1
-        print(self.score)
+        self.close()
 
     def incorrect(self):
         # Form changer
-        self.score -= 1
-        print(self.score)
+        self.close()
+
+
+class HardElem(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+
+    def initUI(self):
+        # Window setup
+        self.setGeometry(412, 412, 412, 500)
+        self.setWindowTitle('Хiмоz@ for punks')
+        self.setWindowIcon(QIcon("icon.jpg"))
+
+        self.hardelem = {'H': 'Водород', 'Li': 'Литий', 'Cu': 'Медь', 'Fe': 'Железо', 'O': 'Кислород',
+                         'Na': 'Натрий', 'K': 'Калий', 'N': 'Азот', 'Mg': 'Магний', 'Ca': 'Кальций',
+                         'Zn': 'Цинк', 'Ag': 'Серебро', 'Au': 'Золото', 'Al': 'Алюминий', 'Si': 'Кремний',
+                         'Zr': 'Цирконий', 'Ge': 'Германий', 'Ne': 'Неон', 'Co': 'Кобальт', 'Ar': 'Аргон',
+                         'Kr': 'Криптон', }
+
+        self.hardchoice = choice(list(self.hardelem.keys()))
+        self.f_in = list(open('score.txt'))
+        self.f_out = open('score.txt', mode='w')
+
+        if randint(0, 1) == 1:
+            self.name_label = QLabel(self)
+            self.name_label.setText(self.hardchoice)
+            self.name_label.move(40, 90)
+
+            self.button_1 = QPushButton(self.hardelem[self.hardchoice], self)
+            self.button_1.resize(206, 100)
+            self.button_1.move(0, 400)
+            self.button_1.clicked.connect(self.correct)
+
+            self.button_2 = QPushButton(self.hardelem[choice(list(self.hardelem.keys()))], self)
+            self.button_2.resize(206, 100)
+            self.button_2.move(206, 400)
+            self.button_2.clicked.connect(self.incorrect)
+
+            self.button_3 = QPushButton('Назад', self)
+            self.button_3.resize(412, 50)
+            self.button_3.move(0, 0)
+            self.button_3.clicked.connect(self.esc)
+
+        else:
+            self.name_label = QLabel(self)
+            self.name_label.setText(self.hardchoice)
+            self.name_label.move(40, 90)
+
+            self.button_2 = QPushButton(self.hardelem[choice(list(self.hardelem.keys()))], self)
+            self.button_2.resize(206, 100)
+            self.button_2.move(0, 400)
+            self.button_2.clicked.connect(self.incorrect)
+
+            self.button_1 = QPushButton(self.hardelem[self.hardchoice], self)
+            self.button_1.resize(206, 100)
+            self.button_1.move(206, 400)
+            self.button_1.clicked.connect(self.correct)
+
+            self.button_3 = QPushButton('Назад', self)
+            self.button_3.resize(412, 50)
+            self.button_3.move(0, 0)
+            self.button_3.clicked.connect(self.esc)
+
+    def esc(self):
+        # Form changer
+        self.close()
+
+    def correct(self):
+        # Form changer
+        self.easy_Elem_form = HardElem()
+        self.easy_Elem_form.show()
+        self.close()
+
+    def incorrect(self):
+        # Form changer
+        self.close()
+
+
+class Wait(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+
+    def initUI(self):
+        # Window setup
+        self.setGeometry(412, 412, 412, 500)
+        self.setWindowTitle('Хiмоz@ for punks')
+        self.pixmap = QPixmap('ximoza.jpg')
+        self.image = QLabel(self)
+        self.image.move(0, 0)
+        self.image.resize(412, 412)
+        self.image.setPixmap(self.pixmap)
+        self.setWindowIcon(QIcon("icon.jpg"))
+
+        # Button setup
+        self.btn = QPushButton('Хочу продолжения', self)
+        self.btn.resize(412, 100)
+        self.btn.move(0, 400)
+        self.btn.clicked.connect(self.open_second_form)
+        self.name_label = QLabel(self)
+        self.name_label.setText('В разработке')
+        self.name_label.move(40, 90)
+
+    def open_second_form(self):
+        # Form changer
+        self.second_form = Menu(self, "")
+        self.second_form.show()
         self.close()
 
 
