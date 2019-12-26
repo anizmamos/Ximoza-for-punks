@@ -215,11 +215,11 @@ class EasyElem(QWidget):
         self.setWindowIcon(QIcon("icon.jpg"))
         self.setStyleSheet("background-color:" + choice(['red', 'green', 'white', 'yellow', 'grey', 'purple', 'pink']))
 
-        self.score = 0
         self.elem = {'H': 'Водород', 'Li': 'Литий', 'Cu': 'Медь', 'Fe': 'Железо', 'O': 'Кислород',
-                         'Na': 'Натрий', 'K': 'Калий', 'N': 'Азот', 'Mg': 'Магний', 'Ca': 'Кальций',
-                         'Zn': 'Цинк', 'Ag': 'Серебро', 'Au': 'Золото', 'Al': 'Алюминий', 'Si': 'Кремний'}
+                     'Na': 'Натрий', 'K': 'Калий', 'N': 'Азот', 'Mg': 'Магний', 'Ca': 'Кальций',
+                     'Zn': 'Цинк', 'Ag': 'Серебро', 'Au': 'Золото', 'Al': 'Алюминий', 'Si': 'Кремний'}
 
+        # elem setup
         self.easychoice = choice(list(self.elem.keys()))
         self.true = self.elem[self.easychoice]
         del self.elem[self.easychoice]
@@ -295,10 +295,11 @@ class HardElem(QWidget):
 
         self.hardelem = {'H': 'Водород', 'Li': 'Литий', 'Cu': 'Медь', 'Fe': 'Железо', 'O': 'Кислород',
                          'Na': 'Натрий', 'K': 'Калий', 'N': 'Азот', 'Mg': 'Магний', 'Ca': 'Кальций',
-                         'Zn': 'Цинк', 'Ag': 'Серебро', 'Au': 'Золото', 'Du': 'Дунавий',  'Al': 'Алюминий',
+                         'Zn': 'Цинк', 'Ag': 'Серебро', 'Au': 'Золото', 'Du': 'Дунавий', 'Al': 'Алюминий',
                          'Zr': 'Цирконий', 'Ge': 'Германий', 'Ne': 'Неон', 'Co': 'Кобальт', 'Ar': 'Аргон',
                          'Kr': 'Криптон', 'Ni': 'Никель', 'Ga': 'Галлий', 'Si': 'Кремний'}
 
+        # hardelem setup
         self.hardchoice = choice(list(self.hardelem.keys()))
         self.true = self.hardelem[self.hardchoice]
         del self.hardelem[self.hardchoice]
