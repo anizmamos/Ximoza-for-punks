@@ -134,7 +134,7 @@ class HandbookO(QWidget):
         # Window setup
         self.setGeometry(412, 412, 412, 500)
         self.setWindowTitle('Хiмоz@ for punks')
-        self.pixmap = QPixmap('OH.png')
+        self.pixmap = QPixmap('o.jpg')
         self.image = QLabel(self)
         self.image.move(0, 0)
         self.image.resize(412, 412)
@@ -216,23 +216,26 @@ class EasyElem(QWidget):
         self.setStyleSheet("background-color:" + choice(['red', 'green', 'white', 'yellow', 'grey', 'purple', 'pink']))
 
         self.score = 0
-        self.easyelem = {'H': 'Водород', 'Li': 'Литий', 'Cu': 'Медь', 'Fe': 'Железо', 'O': 'Кислород',
+        self.elem = {'H': 'Водород', 'Li': 'Литий', 'Cu': 'Медь', 'Fe': 'Железо', 'O': 'Кислород',
                          'Na': 'Натрий', 'K': 'Калий', 'N': 'Азот', 'Mg': 'Магний', 'Ca': 'Кальций',
                          'Zn': 'Цинк', 'Ag': 'Серебро', 'Au': 'Золото', 'Al': 'Алюминий', 'Si': 'Кремний'}
 
-        self.easychoice = choice(list(self.easyelem.keys()))
+        self.easychoice = choice(list(self.elem.keys()))
+        self.true = self.elem[self.easychoice]
+        del self.elem[self.easychoice]
+        self.false = self.elem[choice(list(self.elem.keys()))]
 
         if randint(0, 1) == 1:
             self.name_label = QLabel(self)
             self.name_label.setText(self.easychoice)
             self.name_label.move(40, 90)
 
-            self.button_1 = QPushButton(self.easyelem[self.easychoice], self)
+            self.button_1 = QPushButton(self.true, self)
             self.button_1.resize(206, 100)
             self.button_1.move(0, 400)
             self.button_1.clicked.connect(self.correct)
 
-            self.button_2 = QPushButton(self.easyelem[choice(list(self.easyelem.keys()))], self)
+            self.button_2 = QPushButton(self.false, self)
             self.button_2.resize(206, 100)
             self.button_2.move(206, 400)
             self.button_2.clicked.connect(self.incorrect)
@@ -247,12 +250,12 @@ class EasyElem(QWidget):
             self.name_label.setText(self.easychoice)
             self.name_label.move(40, 90)
 
-            self.button_2 = QPushButton(self.easyelem[choice(list(self.easyelem.keys()))], self)
+            self.button_2 = QPushButton(self.false, self)
             self.button_2.resize(206, 100)
             self.button_2.move(0, 400)
             self.button_2.clicked.connect(self.incorrect)
 
-            self.button_1 = QPushButton(self.easyelem[self.easychoice], self)
+            self.button_1 = QPushButton(self.true, self)
             self.button_1.resize(206, 100)
             self.button_1.move(206, 400)
             self.button_1.clicked.connect(self.correct)
@@ -297,18 +300,21 @@ class HardElem(QWidget):
                          'Kr': 'Криптон', 'Ni': 'Никель', 'Ga': 'Галлий', 'Si': 'Кремний'}
 
         self.hardchoice = choice(list(self.hardelem.keys()))
+        self.true = self.hardelem[self.hardchoice]
+        del self.hardelem[self.hardchoice]
+        self.false = self.hardelem[choice(list(self.hardelem.keys()))]
 
         if randint(0, 1) == 1:
             self.name_label = QLabel(self)
             self.name_label.setText(self.hardchoice)
             self.name_label.move(40, 90)
 
-            self.button_1 = QPushButton(self.hardelem[self.hardchoice], self)
+            self.button_1 = QPushButton(self.true, self)
             self.button_1.resize(206, 100)
             self.button_1.move(0, 400)
             self.button_1.clicked.connect(self.correct)
 
-            self.button_2 = QPushButton(self.hardelem[choice(list(self.hardelem.keys()))], self)
+            self.button_2 = QPushButton(self.false, self)
             self.button_2.resize(206, 100)
             self.button_2.move(206, 400)
             self.button_2.clicked.connect(self.incorrect)
@@ -323,12 +329,12 @@ class HardElem(QWidget):
             self.name_label.setText(self.hardchoice)
             self.name_label.move(40, 90)
 
-            self.button_2 = QPushButton(self.hardelem[choice(list(self.hardelem.keys()))], self)
+            self.button_2 = QPushButton(self.false, self)
             self.button_2.resize(206, 100)
             self.button_2.move(0, 400)
             self.button_2.clicked.connect(self.incorrect)
 
-            self.button_1 = QPushButton(self.hardelem[self.hardchoice], self)
+            self.button_1 = QPushButton(self.true, self)
             self.button_1.resize(206, 100)
             self.button_1.move(206, 400)
             self.button_1.clicked.connect(self.correct)
